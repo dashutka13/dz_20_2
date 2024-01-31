@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from catalog.models import Product
 
@@ -18,10 +18,10 @@ def home_page(request):
 
 
 def product(request, pk):
-    pokemon = Product.objects.get(pk=pk)
+    pokemon = get_object_or_404(Product, pk=pk)
 
     context = {
-        'object_list': Product.objects.filter(category_id=pk),
+        'object': pokemon,
         'title': f'Посмотри как прерасен {pokemon.name}'
     }
 
